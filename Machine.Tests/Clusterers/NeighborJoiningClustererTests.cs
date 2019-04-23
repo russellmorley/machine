@@ -78,5 +78,37 @@ namespace SIL.Machine.Tests.Clusterers
 
 			AssertTreeEqual(tree, edges.ToUndirectedGraph<Cluster<char>, ClusterEdge<char>>());
 		}
+
+		[Test]
+		public void ClusterCombineInternally()
+		{
+			var nj = new NeighborJoiningClusterer<char>((o1, o2) => o1 == 'A' && o2 == 'B' ? 0.02 : 1);
+			IUndirectedGraph<Cluster<char>, ClusterEdge<char>> tree = nj.GenerateClusters(new[] { 'A', 'B', 'C', 'D', 'E', 'F' });
+
+			var vertices = new Dictionary<string, Cluster<char>>
+				{
+					{"root", new Cluster<char> {Description = "root"}},
+					{"A", new Cluster<char>('A') {Description = "A"}},
+					{"B", new Cluster<char>('B') {Description = "B"}},
+					{"C", new Cluster<char>('C') {Description = "C"}},
+					{"D", new Cluster<char>('D') {Description = "D"}},
+					{"E", new Cluster<char>('E') {Description = "E"}},
+					{"F", new Cluster<char>('F') {Description = "F"}},
+					{"AB", new Cluster<char> {Description = "AB"}}
+				};
+
+			var edges = new[]
+				{
+					new ClusterEdge<char>(vertices["root"], vertices["AB"], 0.49),
+					new ClusterEdge<char>(vertices["root"], vertices["C"], 0.5),
+					new ClusterEdge<char>(vertices["root"], vertices["D"], 0.5),
+					new ClusterEdge<char>(vertices["root"], vertices["E"], 0.5),
+					new ClusterEdge<char>(vertices["root"], vertices["F"], 0.5),
+					new ClusterEdge<char>(vertices["AB"], vertices["A"], 0.01),
+					new ClusterEdge<char>(vertices["AB"], vertices["B"], 0.01)
+				};
+
+			AssertTreeEqual(tree, edges.ToUndirectedGraph<Cluster<char>, ClusterEdge<char>>(false));
+		}
 	}
 }

@@ -9,10 +9,12 @@ namespace SIL.Machine.Clusterers
 	public class NeighborJoiningClusterer<T> : IUnrootedHierarchicalClusterer<T>
 	{
 		private readonly Func<T, T, double> _getDistance;
+		private readonly double _epsilon;
 
-		public NeighborJoiningClusterer(Func<T, T, double> getDistance)
+		public NeighborJoiningClusterer(Func<T, T, double> getDistance, double epsilon = 0.00000001)
 		{
 			_getDistance = getDistance;
+			_epsilon = epsilon;
 		}
 
 		public IUndirectedGraph<Cluster<T>, ClusterEdge<T>> GenerateClusters(IEnumerable<T> dataObjects)
@@ -66,29 +68,9 @@ namespace SIL.Machine.Clusterers
 				tree.AddVertex(uCluster);
 
 				double iLen = (minDist / 2) + ((r[iCluster] - r[jCluster]) / 2);
-				if (iLen <= 0 && !tree.IsOutEdgesEmpty(iCluster))
-				{
-					foreach (ClusterEdge<T> edge in tree.OutEdges(iCluster))
-						tree.AddEdge(new ClusterEdge<T>(uCluster, edge.Target, edge.Length));
-					tree.RemoveVertex(iCluster);
-				}
-				else
-				{
-					tree.RemoveInEdgeIf(iCluster, edge => true);
-					tree.AddEdge(new ClusterEdge<T>(uCluster, iCluster, Math.Max(iLen, 0)));
-				}
+				AddEdge(tree, iLen, uCluster, iCluster);
 				double jLen = minDist - iLen;
-				if (jLen <= 0 && !tree.IsOutEdgesEmpty(jCluster))
-				{
-					foreach (ClusterEdge<T> edge in tree.OutEdges(jCluster))
-						tree.AddEdge(new ClusterEdge<T>(uCluster, edge.Target, edge.Length));
-					tree.RemoveVertex(jCluster);
-				}
-				else
-				{
-					tree.RemoveInEdgeIf(jCluster, edge => true);
-					tree.AddEdge(new ClusterEdge<T>(uCluster, jCluster, Math.Max(jLen, 0)));
-				}
+				AddEdge(tree, jLen, uCluster, jCluster);
 
 				foreach (Cluster<T> kCluster in clusters.Where(c => c != iCluster && c != jCluster))
 				{
@@ -105,7 +87,8 @@ namespace SIL.Machine.Clusterers
 
 			if (clusters.Count == 2)
 			{
-				tree.AddEdge(new ClusterEdge<T>(clusters[1], clusters[0], distances[UnorderedTuple.Create(clusters[0], clusters[1])]));
+				double len = distances[UnorderedTuple.Create(clusters[0], clusters[1])];
+				AddEdge(tree, len, clusters[1], clusters[0]);
 				clusters.RemoveAt(0);
 			}
 
@@ -113,6 +96,22 @@ namespace SIL.Machine.Clusterers
 			unrootedTree.AddVertexRange(tree.Vertices);
 			unrootedTree.AddEdgeRange(tree.Edges);
 			return unrootedTree;
+		}
+
+		private void AddEdge(BidirectionalGraph<Cluster<T>, ClusterEdge<T>> tree, double len, Cluster<T> source, Cluster<T> target)
+		{
+			if (len <= _epsilon && !tree.IsOutEdgesEmpty(target))
+			{
+				// no distance between clusters so combine them into one cluster
+				foreach (ClusterEdge<T> edge in tree.OutEdges(target))
+					tree.AddEdge(new ClusterEdge<T>(source, edge.Target, edge.Length));
+				tree.RemoveVertex(target);
+			}
+			else
+			{
+				tree.RemoveInEdgeIf(target, edge => true);
+				tree.AddEdge(new ClusterEdge<T>(source, target, Math.Max(len, 0)));
+			}
 		}
 	}
 }
