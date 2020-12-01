@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SIL.Machine.Plugin\SIL.Machine.Plugin.csproj" />
+    <ProjectReference Include="..\SIL.Machine.Translation.OpenNmt\SIL.Machine.Translation.OpenNmt.csproj" />
     <ProjectReference Include="..\SIL.Machine.Translation.Thot\SIL.Machine.Translation.Thot.csproj" />
     <ProjectReference Include="..\SIL.Machine\SIL.Machine.csproj" />
   </ItemGroup>

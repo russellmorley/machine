@@ -6,6 +6,7 @@ using SIL.Extensions;
 using SIL.Machine.Corpora;
 using SIL.Machine.Tokenization;
 using SIL.Machine.Translation;
+using SIL.Machine.Translation.OpenNmt;
 using SIL.Machine.Translation.Thot;
 using SIL.Scripture;
 
@@ -18,6 +19,7 @@ namespace SIL.Machine
 		public const string Ibm2 = "ibm2";
 		public const string FastAlign = "fast_align";
 		public const string Smt = "smt";
+		public const string Nmt = "nmt";
 
 		public static bool ValidateCorpusFormatOption(string value)
 		{
@@ -141,7 +143,7 @@ namespace SIL.Machine
 
 		public static bool ValidateTranslationModelTypeOption(string value)
 		{
-			var validTypes = new HashSet<string> { Hmm, Ibm1, Ibm2, FastAlign };
+			var validTypes = new HashSet<string> { Hmm, Ibm1, Ibm2, FastAlign, Nmt };
 			return string.IsNullOrEmpty(value) || validTypes.Contains(value);
 		}
 
@@ -163,6 +165,9 @@ namespace SIL.Machine
 				case FastAlign:
 					return CreateThotSmtModelTrainer<FastAlignWordAlignmentModel>(modelType, modelConfigFileName,
 						corpus, maxSize);
+				case Nmt:
+					return new OpenNmtModelTrainer(modelConfigFileName, TokenProcessors.Lowercase,
+						TokenProcessors.Lowercase, corpus, maxSize);
 			}
 		}
 

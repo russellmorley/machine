@@ -17,7 +17,7 @@ namespace SIL.Machine
 		{
 			_modelArgument = command.Argument("MODEL_PATH", "The translation model.").IsRequired();
 			_modelTypeOption = command.Option("-mt|--model-type <MODEL_TYPE>",
-				$"The word alignment model type.\nTypes: \"{ToolHelpers.Hmm}\" (default), \"{ToolHelpers.Ibm1}\", \"{ToolHelpers.Ibm2}\", \"{ToolHelpers.FastAlign}\".",
+				$"The translation model type.\nTypes: \"{ToolHelpers.Hmm}\" (default), \"{ToolHelpers.Ibm1}\", \"{ToolHelpers.Ibm2}\", \"{ToolHelpers.FastAlign}\".",
 				CommandOptionType.SingleValue);
 		}
 
