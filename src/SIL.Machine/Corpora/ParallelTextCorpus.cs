@@ -21,12 +21,12 @@ namespace SIL.Machine.Corpora
 		public bool AllSourceRows { get; set; }
 		public bool AllTargetRows { get; set; }
 
-		public ITextCorpus SourceCorpus { get; }
-		public ITextCorpus TargetCorpus { get; }
-		public IAlignmentCorpus AlignmentCorpus { get; }
+		public ITextCorpus SourceCorpus { get; set; }
+		public ITextCorpus TargetCorpus { get; set; }
+		public IAlignmentCorpus AlignmentCorpus { get; set; }
 		public IComparer<object> RowRefComparer { get; }
 
-		public IEnumerator<ParallelTextRow> GetEnumerator()
+		public virtual IEnumerator<ParallelTextRow> GetEnumerator()
 		{
 			return GetRows().GetEnumerator();
 		}

@@ -35,7 +35,7 @@ namespace SIL.Machine.Corpora
 		public double TranslationScore { get; set; } = -1;
 		public double AlignmentScore { get; set; } = -1;
 
-		public AlignedWordPair Invert()
+		public virtual AlignedWordPair Invert()
 		{
 			return new AlignedWordPair(TargetIndex, SourceIndex)
 			{

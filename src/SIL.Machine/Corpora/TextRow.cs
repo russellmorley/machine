@@ -20,7 +20,7 @@ namespace SIL.Machine.Corpora
 		public bool IsRangeStart { get; set; }
 
 
-		public IReadOnlyList<string> Segment { get; set; } = Array.Empty<string>();
+		public virtual IReadOnlyList<string> Segment { get; set; } = Array.Empty<string>();
 		public string Text => string.Join(" ", Segment);
 
 		public override string ToString()
