@@ -52,7 +52,7 @@ namespace SIL.Machine.Corpora
 				textIds = targetTextIds;
 
 			using (IEnumerator<TextRow> srcEnumerator = SourceCorpus.GetRows(textIds).GetEnumerator())
-			using (var trgEnumerator = new TargetCorpusEnumerator(TargetCorpus.GetRows(textIds).GetEnumerator()))
+			using (var trgEnumerator = GetTargetCorpusEnumerator(TargetCorpus.GetRows(textIds).GetEnumerator()))
 			using (IEnumerator<AlignmentRow> alignmentEnumerator = AlignmentCorpus.GetRows(textIds).GetEnumerator())
 			{
 				var rangeInfo = new RangeInfo();
@@ -380,8 +380,11 @@ namespace SIL.Machine.Corpora
 				return Comparer<object>.Default.Compare(x, y);
 			}
 		}
-
-		private class TargetCorpusEnumerator : DisposableBase, IEnumerator<TextRow>
+		protected virtual TargetCorpusEnumerator GetTargetCorpusEnumerator(IEnumerator<TextRow> enumerator)
+		{
+			return new TargetCorpusEnumerator(enumerator);
+		}
+		protected class TargetCorpusEnumerator : DisposableBase, IEnumerator<TextRow>
 		{
 			private readonly IEnumerator<TextRow> _enumerator;
 			private bool _isScripture = false;
@@ -450,6 +453,15 @@ namespace SIL.Machine.Corpora
 				_enumerator.Dispose();
 			}
 
+			protected virtual TextRow CreateTextRow(TextRow textRow, TextRow concatSegmentTextRow = null)
+			{
+				var newTextRow =  new TextRow(textRow.Ref);
+				if (concatSegmentTextRow != null)
+				{ 
+					newTextRow.Segment = textRow.Segment.Concat(concatSegmentTextRow.Segment).ToArray();
+				}
+				return newTextRow;
+			}
 			private void CollectVerses()
 			{
 				var rowList = new List<(VerseRef Ref, TextRow Row)>();
@@ -471,16 +483,18 @@ namespace SIL.Machine.Corpora
 						bool isRangeStart = false;
 						if (rangeStartOffset == -1)
 							isRangeStart = !rangeStartRow.IsInRange || rangeStartRow.IsRangeStart;
+
+						var newTextRow = CreateTextRow(rangeStartRow, row);
+						newTextRow.IsSentenceStart = rangeStartRow.IsSentenceStart;
+						newTextRow.IsInRange = true;
+						newTextRow.IsRangeStart = isRangeStart;
+						newTextRow.IsEmpty = rangeStartRow.IsEmpty && row.IsEmpty;
+
 						rowList[rowList.Count + rangeStartOffset] = (rangeStartVerseRef,
-							new TextRow(rangeStartRow.Ref)
-							{
-								Segment = rangeStartRow.Segment.Concat(row.Segment).ToArray(),
-								IsSentenceStart = rangeStartRow.IsSentenceStart,
-								IsInRange = true,
-								IsRangeStart = isRangeStart,
-								IsEmpty = rangeStartRow.IsEmpty && row.IsEmpty
-							});
-						row = new TextRow(row.Ref) { IsInRange = true };
+							newTextRow);
+
+						row = CreateTextRow(row);
+						row.IsInRange = true;
 						rangeStartOffset--;
 					}
 					else
