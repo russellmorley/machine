@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 #endif
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.Annotations;
 using SIL.Machine.FeatureModel;
 using SIL.Machine.Morphology.HermitCrab.MorphologicalRules;
@@ -17,6 +16,9 @@ using SIL.ObjectModel;
 
 namespace SIL.Machine.Morphology.HermitCrab
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	public class Morpher : IMorphologicalAnalyzer, IMorphologicalGenerator
 	{
 		private static readonly IEqualityComparer<IEnumerable<Allomorph>> MorphsEqualityComparer =

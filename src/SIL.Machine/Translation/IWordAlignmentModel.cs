@@ -9,7 +9,7 @@ namespace SIL.Machine.Translation
 	{
 		IWordVocabulary SourceWords { get; }
 		IWordVocabulary TargetWords { get; }
-		IReadOnlySet<int> SpecialSymbolIndices { get; }
+		ObjectModel.IReadOnlySet<int> SpecialSymbolIndices { get; }
 
 		ITrainer CreateTrainer(IEnumerable<ParallelTextRow> corpus);
 

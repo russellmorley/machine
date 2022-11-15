@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.Annotations;
 using SIL.Machine.DataStructures;
 using SIL.Machine.FeatureModel;
@@ -10,6 +9,9 @@ using SIL.Machine.Matching;
 
 namespace SIL.Machine.Morphology.HermitCrab.PhonologicalRules
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	public class AnalysisMetathesisRuleSpec : IPhonologicalPatternRuleSpec, IPhonologicalPatternSubruleSpec
 	{
 		private readonly Pattern<Word, ShapeNode> _pattern;

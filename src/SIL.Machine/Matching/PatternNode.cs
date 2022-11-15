@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.Annotations;
 using SIL.Machine.DataStructures;
 using SIL.Machine.FiniteState;
@@ -9,6 +8,9 @@ using SIL.ObjectModel;
 
 namespace SIL.Machine.Matching
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	/// <summary>
 	/// This is the abstract class that all phonetic pattern nodes extend.
 	/// </summary>

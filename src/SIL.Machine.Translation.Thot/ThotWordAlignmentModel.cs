@@ -71,7 +71,7 @@ namespace SIL.Machine.Translation.Thot
 			}
 		}
 
-		public IReadOnlySet<int> SpecialSymbolIndices { get; } = new HashSet<int> { 0, 1, 2 }.ToReadOnlySet();
+		public ObjectModel.IReadOnlySet<int> SpecialSymbolIndices { get; } = new HashSet<int> { 0, 1, 2 }.ToReadOnlySet();
 
 		public ThotWordAlignmentParameters Parameters { get; set; } = new ThotWordAlignmentParameters();
 

@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.DataStructures;
-using SIL.ObjectModel;
 
 namespace SIL.Machine.NgramModeling
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	public class Ngram<TItem> : IReadOnlyList<TItem>, IStructuralEquatable, IEquatable<Ngram<TItem>>
 	{
 		public static implicit operator Ngram<TItem>(TItem item)

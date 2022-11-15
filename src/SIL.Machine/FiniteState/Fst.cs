@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.Annotations;
 using SIL.Machine.DataStructures;
 using SIL.Machine.FeatureModel;
@@ -10,6 +9,9 @@ using SIL.ObjectModel;
 
 namespace SIL.Machine.FiniteState
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	/// <summary>
 	/// A finite state transducer that works withs annotations with feature structures.
 	/// 

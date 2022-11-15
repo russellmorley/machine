@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.DataStructures;
 using SIL.Machine.FeatureModel;
 using SIL.ObjectModel;
 
 namespace SIL.Machine.Annotations
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	public class Shape : OrderedBidirList<ShapeNode>, IAnnotatedData<ShapeNode>, ICloneable<Shape>, IFreezable,
 		IValueEquatable<Shape>
 	{

@@ -33,7 +33,7 @@ namespace SIL.Machine.Translation.Thot
 
 		public IWordVocabulary TargetWords => _smtModel.DirectWordAlignmentModel.TargetWords;
 
-		public IReadOnlySet<int> SpecialSymbolIndices => _smtModel.DirectWordAlignmentModel.SpecialSymbolIndices;
+		public ObjectModel.IReadOnlySet<int> SpecialSymbolIndices => _smtModel.DirectWordAlignmentModel.SpecialSymbolIndices;
 
 		public ITrainer CreateTrainer(IEnumerable<ParallelTextRow> corpus)
 		{

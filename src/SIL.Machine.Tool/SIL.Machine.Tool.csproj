@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net7.0</TargetFrameworks>
     <RootNamespace>SIL.Machine</RootNamespace>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>machine</ToolCommandName>

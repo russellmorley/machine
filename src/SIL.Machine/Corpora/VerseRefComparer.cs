@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Scripture;
+
 
 namespace SIL.Machine.Corpora
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	public class VerseRefComparer : IComparer<VerseRef>
 	{
 		private readonly bool _compareSegments;

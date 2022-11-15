@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 
 namespace SIL.Machine.Statistics
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	public static class StatisticalMethods
 	{
 		public static double CosineSimilarity(IEnumerable<double> dist1, IEnumerable<double> dist2)

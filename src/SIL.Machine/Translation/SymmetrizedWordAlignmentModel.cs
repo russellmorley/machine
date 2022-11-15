@@ -65,7 +65,7 @@ namespace SIL.Machine.Translation
 			}
 		}
 
-		public IReadOnlySet<int> SpecialSymbolIndices => _directWordAlignmentModel.SpecialSymbolIndices;
+		public ObjectModel.IReadOnlySet<int> SpecialSymbolIndices => _directWordAlignmentModel.SpecialSymbolIndices;
 
 		public WordAlignmentMatrix GetBestAlignment(IReadOnlyList<string> sourceSegment,
 			IReadOnlyList<string> targetSegment)

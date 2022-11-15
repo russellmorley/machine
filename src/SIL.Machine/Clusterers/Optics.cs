@@ -31,7 +31,7 @@ namespace SIL.Machine.Clusterers
 
 		private void ExpandClusterOrder(List<ClusterOrderEntry<T>> clusterOrder, HashSet<T> processed, T dataObject)
 		{
-			var priorityQueue = new PriorityQueue<double, T>();
+			var priorityQueue = new DataStructures.PriorityQueue<double, T>();
 			var enqueuedNodes = new Dictionary<T, PriorityQueueNode<double, T>>();
 			var dataObjectNode = new PriorityQueueNode<double, T>(double.PositiveInfinity, dataObject);
 			enqueuedNodes[dataObject] = dataObjectNode;

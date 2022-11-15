@@ -26,7 +26,7 @@ namespace SIL.Machine.Clusterers
 
 		public string Description { get; set; }
 
-		public IReadOnlySet<T> DataObjects
+		public ObjectModel.IReadOnlySet<T> DataObjects
 		{
 			get { return _dataObjects; }
 		}

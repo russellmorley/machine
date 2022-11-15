@@ -8,6 +8,8 @@ using SIL.Machine.Statistics;
 
 namespace SIL.Machine.Translation
 {
+	// NB:  Prevent ambiguous reference for .MaxBu extension method.
+	using SIL.Extensions;
 	public class WordGraph
 	{
 		private static readonly int[] EmptyArcIndices = new int[0];

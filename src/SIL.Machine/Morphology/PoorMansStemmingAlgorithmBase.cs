@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.DataStructures;
 using SIL.Machine.NgramModeling;
 using SIL.Machine.Statistics;
 
 namespace SIL.Machine.Morphology
 {
+	// NB:  Prevent ambiguous reference for .MaxBy extension method.
+	using SIL.Extensions;
+
 	public abstract class PoorMansStemmingAlgorithmBase<TSeq, TItem>
 	{
 		private readonly Func<TSeq, IEnumerable<IEnumerable<TItem>>> _syllablesSelector;

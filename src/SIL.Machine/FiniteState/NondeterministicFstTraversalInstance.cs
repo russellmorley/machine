@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.Annotations;
 using SIL.Machine.DataStructures;
 
 namespace SIL.Machine.FiniteState
 {
+	// NB:  Prevent ambiguous reference for .Zip extension method.
+	using SIL.Extensions;
+
 	internal class NondeterministicFstTraversalInstance<TData, TOffset> : TraversalInstance<TData, TOffset> where TData : IAnnotatedData<TOffset>
 	{
 		private readonly HashSet<State<TData, TOffset>> _visited;
