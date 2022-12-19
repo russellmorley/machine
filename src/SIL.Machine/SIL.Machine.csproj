@@ -6,7 +6,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>2.5.12-a</Version>
+		<Version>2.5.12</Version>
 		<PackageId>Clear.SIL.Machine</PackageId>
 	</PropertyGroup>
 
