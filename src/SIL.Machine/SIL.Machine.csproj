@@ -5,6 +5,9 @@
 		<Description>A natural language processing library for .NET that is focused on providing tools for resource-poor languages.</Description>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>2.5.12-a</Version>
+		<PackageId>Clear.SIL.Machine</PackageId>
 	</PropertyGroup>
 
 	<Import Project="../AssemblyInfo.props" />
