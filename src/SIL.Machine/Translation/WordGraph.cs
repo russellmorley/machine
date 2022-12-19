@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using SIL.Extensions;
 using SIL.Machine.Statistics;
 
 namespace SIL.Machine.Translation
 {
-	// NB:  Prevent ambiguous reference for .MaxBu extension method.
+	// NB:  Prevent ambiguous reference for .MaxBy extension method.
 	using SIL.Extensions;
+
 	public class WordGraph
 	{
 		private static readonly int[] EmptyArcIndices = new int[0];
