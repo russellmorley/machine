@@ -7,6 +7,10 @@
 		<NoWarn>1591</NoWarn>
 		<AssemblyName>Clear.SIL.Machine</AssemblyName>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<AssemblyVersion>2.5.13.0</AssemblyVersion>
+		<FileVersion>2.5.13.0</FileVersion>
 	</PropertyGroup>
 
 	<Import Project="../AssemblyInfo.props" />
@@ -22,9 +26,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="Sandwych.QuickGraph.Core" Version="1.0.0" />
-		<PackageReference Include="SIL.Scripture" Version="7.0.0" />
+		<PackageReference Include="SIL.Scripture" Version="10.1.0" />
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
 	</ItemGroup>
 
