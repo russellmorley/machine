@@ -35,10 +35,8 @@ namespace SIL.Machine.Corpora
 
 		protected abstract IEnumerable<TextRow> GetVersesInDocOrder();
 
-		protected IEnumerable<TextRow> CreateRows(string chapter, string verse,
-			string text, bool sentenceStart = true)
+		protected IEnumerable<TextRow> CreateRows(VerseRef verseRef, string text = "", bool isSentenceStart = true)
 		{
-			var verseRef = new VerseRef(Id, chapter, verse, Versification);
 			if (verseRef.HasMultiple)
 			{
 				bool firstVerse = true;
@@ -46,7 +44,7 @@ namespace SIL.Machine.Corpora
 				{
 					if (firstVerse)
 					{
-						yield return CreateRow(text, vref, sentenceStart, isInRange: true,
+						yield return CreateRow(text, vref, isSentenceStart, isInRange: true,
 							isRangeStart: true);
 						firstVerse = false;
 					}
@@ -58,8 +56,19 @@ namespace SIL.Machine.Corpora
 			}
 			else
 			{
-				yield return CreateRow(text, verseRef, sentenceStart);
+				yield return CreateRow(text, verseRef, isSentenceStart);
 			}
+		}
+
+		protected IEnumerable<TextRow> CreateRows(string chapter, string verse,
+			string text, bool sentenceStart = true)
+		{
+			return CreateRows(CreateVerseRef(chapter, verse), text, sentenceStart);
+		}
+
+		protected VerseRef CreateVerseRef(string chapter, string verse)
+		{
+			return new VerseRef(Id, chapter, verse, Versification);
 		}
 	}
 }

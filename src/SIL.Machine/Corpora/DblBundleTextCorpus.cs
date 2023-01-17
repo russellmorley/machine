@@ -5,7 +5,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Xml.Linq;
 using SIL.IO;
-using SIL.Scripture;
 
 namespace SIL.Machine.Corpora
 {
@@ -49,7 +48,5 @@ namespace SIL.Machine.Corpora
 				}
 			}
 		}
-
-		public override ScrVers Versification { get; } = ScrVers.English;
 	}
 }
