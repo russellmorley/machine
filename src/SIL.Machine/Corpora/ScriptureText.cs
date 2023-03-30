@@ -60,12 +60,6 @@ namespace SIL.Machine.Corpora
 			}
 		}
 
-		protected IEnumerable<TextRow> CreateRows(string chapter, string verse,
-			string text, bool sentenceStart = true)
-		{
-			return CreateRows(CreateVerseRef(chapter, verse), text, sentenceStart);
-		}
-
 		protected VerseRef CreateVerseRef(string chapter, string verse)
 		{
 			return new VerseRef(Id, chapter, verse, Versification);
