@@ -30,6 +30,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="Sandwych.QuickGraph.Core" Version="1.0.0" />
 		<PackageReference Include="SIL.Scripture" Version="10.1.0" />
+		<PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
 	</ItemGroup>
 

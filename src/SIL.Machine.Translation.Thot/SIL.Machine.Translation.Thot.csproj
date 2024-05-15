@@ -8,6 +8,7 @@
   <Import Project="../AssemblyInfo.props" />
 
   <ItemGroup>
+    <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
     <PackageReference Include="Thot" Version="3.3.5" />
   </ItemGroup>
 
